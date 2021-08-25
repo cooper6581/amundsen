@@ -35,6 +35,8 @@ import {
   SortDirection,
   Badge,
 } from 'interfaces';
+import { ProgrammaticDescription } from 'interfaces/TableMetadata';
+
 import { TABLE_TAB } from 'pages/TableDetailPage/constants';
 import { logAction } from 'utils/analytics';
 import { buildTableKey, TablePageParams } from 'utils/navigationUtils';
@@ -101,6 +103,7 @@ type FormattedDataType = {
   sort_order: string;
   isEditable: boolean;
   badges: Badge[];
+  programmatic_descriptions: ProgrammaticDescription[] | null;
 };
 
 type ExpandedRowProps = {
@@ -204,6 +207,13 @@ const ExpandedRowComponent: React.FC<ExpandedRowProps> = (
           />
         </EditableSection>
       )}
+      {rowValue.programmatic_descriptions &&
+        rowValue.programmatic_descriptions.map((desc) => (
+          <div>
+            <b>{desc.source}:</b>
+            <p>{desc.text}</p>
+          </div>
+        ))}
       {normalStats && <ColumnStats stats={normalStats} />}
       {uniqueValueStats && (
         <ExpandableUniqueValues uniqueValues={uniqueValueStats} />
@@ -230,6 +240,8 @@ const ColumnList: React.FC<ColumnListProps> = ({
   let selectedIndex;
   const formattedData: FormattedDataType[] = columns.map((item, index) => {
     const hasItemStats = !!item.stats.length;
+    const hasItemPrgDescriptions = !!item.programmatic_descriptions.length;
+
     if (item.name === selectedColumn) {
       selectedIndex = index;
     }
@@ -247,6 +259,9 @@ const ColumnList: React.FC<ColumnListProps> = ({
       usage: getUsageStat(item),
       stats: hasItemStats ? item.stats : null,
       badges: hasColumnBadges ? item.badges : [],
+      programmatic_descriptions: hasItemPrgDescriptions
+        ? item.programmatic_descriptions
+        : null,
       action: item.name,
       name: item.name,
       isEditable: item.is_editable,

@@ -55,6 +55,7 @@ export interface TableColumn {
   sort_order: string;
   stats: TableColumnStats[];
   badges: Badge[];
+  programmatic_descriptions: ProgrammaticDescription[];
 }
 
 export interface TableOwners {

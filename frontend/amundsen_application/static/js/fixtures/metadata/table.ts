@@ -41,6 +41,7 @@ export const tableMetadata: TableMetadata = {
         },
       ],
       badges: [],
+      programmatic_descriptions: [],
     },
     {
       col_type: 'string',
@@ -51,6 +52,7 @@ export const tableMetadata: TableMetadata = {
       name: 'ds',
       stats: [],
       badges: [],
+      programmatic_descriptions: [],
     },
     {
       col_type: 'string',
@@ -97,6 +99,7 @@ export const tableMetadata: TableMetadata = {
         },
       ],
       badges: [],
+      programmatic_descriptions: [],
     },
   ],
   database: 'hive',
