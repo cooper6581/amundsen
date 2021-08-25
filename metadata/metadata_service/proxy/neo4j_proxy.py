@@ -160,8 +160,10 @@ class Neo4jProxy(BaseProxy):
         OPTIONAL MATCH (col:Column)-[:DESCRIPTION]->(col_dscrpt:Description)
         OPTIONAL MATCH (col:Column)-[:STAT]->(stat:Stat)
         OPTIONAL MATCH (col:Column)-[:HAS_BADGE]->(badge:Badge)
+        OPTIONAL MATCH (col)-[:DESCRIPTION]->(prog_descriptions:Programmatic_Description)
         RETURN db, clstr, schema, tbl, tbl_dscrpt, col, col_dscrpt, collect(distinct stat) as col_stats,
-        collect(distinct badge) as col_badges
+        collect(distinct badge) as col_badges,
+        collect(distinct prog_descriptions) as prog_descriptions
         ORDER BY col.sort_order;""")
 
         tbl_col_neo4j_records = self._execute_cypher_query(
@@ -181,6 +183,8 @@ class Neo4jProxy(BaseProxy):
                 col_stats.append(col_stat)
 
             column_badges = self._make_badges(tbl_col_neo4j_record['col_badges'])
+            programmatic_descriptions = self._create_programmatic_descriptions(tbl_col_neo4j_record['prog_descriptions'])
+
 
             last_neo4j_record = tbl_col_neo4j_record
             col = Column(name=tbl_col_neo4j_record['col']['name'],
@@ -188,7 +192,8 @@ class Neo4jProxy(BaseProxy):
                          col_type=tbl_col_neo4j_record['col']['col_type'],
                          sort_order=int(tbl_col_neo4j_record['col']['sort_order']),
                          stats=col_stats,
-                         badges=column_badges)
+                         badges=column_badges,
+                         programmatic_descriptions=programmatic_descriptions)
 
             cols.append(col)
 
