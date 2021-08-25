@@ -50,6 +50,16 @@ class StatSchema(AttrsSchema):
         target = Stat
         register_as_scheme = True
 
+@attr.s(auto_attribs=True, kw_only=True)
+class ProgrammaticDescription:
+    source: str
+    text: str
+
+class ProgrammaticDescriptionSchema(AttrsSchema):
+    class Meta:
+        target = ProgrammaticDescription
+        register_as_scheme = True
+
 
 @attr.s(auto_attribs=True, kw_only=True)
 class Column:
@@ -60,6 +70,7 @@ class Column:
     sort_order: int
     stats: List[Stat] = []
     badges: Optional[List[Badge]] = []
+    programmatic_descriptions: List[ProgrammaticDescription] = []
 
 
 class ColumnSchema(AttrsSchema):
@@ -111,18 +122,6 @@ class ResourceReportSchema(AttrsSchema):
 # `attr.converters.default_if_none(default=False)`
 def default_if_none(arg: Optional[bool]) -> bool:
     return arg or False
-
-
-@attr.s(auto_attribs=True, kw_only=True)
-class ProgrammaticDescription:
-    source: str
-    text: str
-
-
-class ProgrammaticDescriptionSchema(AttrsSchema):
-    class Meta:
-        target = ProgrammaticDescription
-        register_as_scheme = True
 
 
 @attr.s(auto_attribs=True, kw_only=True)
