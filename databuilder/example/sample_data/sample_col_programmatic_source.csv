@@ -1,0 +1,4 @@
+name,description,col_type,sort_order,database,cluster,schema,table_name,badges,description_source
+col1,"col1 prg description","string",1,hive,gold,test_schema,test_table1,PK,schemata
+col2,"col2 prg description","string",2,hive,gold,test_schema,test_table1,PII,schemata
+col3,"col3 prg description","string",3,hive,gold,test_schema,test_table1,"FK,PII",schemata
