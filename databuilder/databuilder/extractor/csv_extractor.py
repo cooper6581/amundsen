@@ -210,7 +210,8 @@ class CsvTableColumnExtractor(Extractor):
                 description=column_dict['description'],
                 col_type=column_dict['col_type'],
                 sort_order=int(column_dict['sort_order']),
-                badges=split_badges
+                badges=split_badges,
+                description_source=column_dict['description_source']
             )
             parsed_columns[id].append(column)
 

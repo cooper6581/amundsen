@@ -355,6 +355,8 @@ if __name__ == "__main__":
     # logging.basicConfig(level=logging.INFO)
 
     run_table_column_job('example/sample_data/sample_table.csv', 'example/sample_data/sample_col.csv')
+    run_table_column_job('example/sample_data/sample_table.csv', 'example/sample_data/sample_col_programmatic_source.csv')
+
     run_table_badge_job('example/sample_data/sample_table.csv', 'example/sample_data/sample_badges.csv')
     run_table_lineage_job('example/sample_data/sample_table_lineage.csv')
     run_column_lineage_job('example/sample_data/sample_column_lineage.csv')
@@ -370,8 +372,8 @@ if __name__ == "__main__":
                 'databuilder.models.table_column_usage.ColumnReader')
     run_csv_job('example/sample_data/sample_user.csv', 'test_user_metadata',
                 'databuilder.models.user.User')
-    run_csv_job('example/sample_data/sample_application.csv', 'test_application_metadata',
-                'databuilder.models.application.Application')
+#    run_csv_job('example/sample_data/sample_application.csv', 'test_application_metadata',
+#                'databuilder.models.application.Application')
     run_csv_job('example/sample_data/sample_source.csv', 'test_source_metadata',
                 'databuilder.models.table_source.TableSource')
     run_csv_job('example/sample_data/sample_tags.csv', 'test_tag_metadata',

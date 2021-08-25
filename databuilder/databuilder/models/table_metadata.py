@@ -321,6 +321,7 @@ class ColumnMetadata:
                  col_type: str,
                  sort_order: int,
                  badges: Union[List[str], None] = None,
+                 description_source: Union[str, None] = None,
                  ) -> None:
         """
         TODO: Add stats
@@ -329,10 +330,11 @@ class ColumnMetadata:
         :param col_type:
         :param sort_order:
         :param badges: Optional. Column level badges
+        :param description_source: Optional. Where the description is coming from. Used to compose unique id.
         """
         self.name = name
-        self.description = DescriptionMetadata.create_description_metadata(source=None,
-                                                                           text=description)
+        self.description = DescriptionMetadata.create_description_metadata(text=description,
+                                                                           source=description_source)
         self.type = col_type
         self.sort_order = sort_order
         formatted_badges = _format_as_list(badges)
